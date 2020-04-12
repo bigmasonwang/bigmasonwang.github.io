@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="重新记录Python的基础语法学习，这部分关于深浅复制、set、正则表达式等学习源莫烦PYTHON">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python step6">
+<meta property="og:url" content="http://yoursite.com/2019/12/08/Python-step6/index.html">
+<meta property="og:site_name" content="Mason&#39;s NoteBook">
+<meta property="og:description" content="重新记录Python的基础语法学习，这部分关于深浅复制、set、正则表达式等学习源莫烦PYTHON">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-08T01:41:15.000Z">
+<meta property="article:modified_time" content="2019-12-08T01:26:08.000Z">
+<meta property="article:author" content="Mason">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/08/Python-step6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Python step6 | Mason's NoteBook</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Mason's NoteBook</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">做个记录</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/08/Python-step6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mason">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mason's NoteBook">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python step6
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-08 12:11:15 / Modified: 11:56:08" itemprop="dateCreated datePublished" datetime="2019-12-08T12:11:15+10:30">2019-12-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>重新记录Python的基础语法学习，这部分关于深浅复制、set、正则表达式等<br>学习源<a href="https://morvanzhou.github.io/tutorials/python-basic/basic/" target="_blank" rel="noopener">莫烦PYTHON</a></p>
+<a id="more"></a>
+
+
+<h2 id="zip-lambda-map"><a href="#zip-lambda-map" class="headerlink" title="zip lambda map"></a>zip lambda map</h2><p>举个例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>zip(a,b)</span><br><span class="line">&lt;zip object at <span class="number">0x1095cb988</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(zip(a,b))</span><br><span class="line">[(<span class="number">1</span>, <span class="number">4</span>), (<span class="number">2</span>, <span class="number">5</span>), (<span class="number">3</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i,j <span class="keyword">in</span> zip(a,b):      //我们可以做一些运算    迭代器</span><br><span class="line">	print(i/<span class="number">2</span>,j*<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">0.5</span> <span class="number">8</span></span><br><span class="line"><span class="number">1.0</span> <span class="number">10</span></span><br><span class="line"><span class="number">1.5</span> <span class="number">12</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(zip(a,a,b))           //现在我们试着zip三个元素</span><br><span class="line">[(<span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>), (<span class="number">2</span>, <span class="number">2</span>, <span class="number">5</span>), (<span class="number">3</span>, <span class="number">3</span>, <span class="number">6</span>)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">fun1</span><span class="params">(x,y)</span>:</span>           //传统的定义方程</span><br><span class="line">	<span class="keyword">return</span>(x+y)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun1(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun2 = <span class="keyword">lambda</span> x,y:x+y     //用<span class="keyword">lambda</span>可以在一行之中定义一个方程</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun2(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="number">5</span></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(map(fun1,[<span class="number">1</span>],[<span class="number">2</span>]))</span><br><span class="line">[<span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(map(fun1,[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">2</span>,<span class="number">5</span>]))</span><br><span class="line">[<span class="number">3</span>, <span class="number">8</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="浅复制-amp-深复制-deepcopy"><a href="#浅复制-amp-深复制-deepcopy" class="headerlink" title="浅复制&amp;深复制 (deepcopy)"></a>浅复制&amp;深复制 (deepcopy)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> copy     //调用模块</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]     //建立列表</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a           //这里b和a指向硬盘中同一个位置，只不过用不同的变量表示</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)           //取内存地址</span><br><span class="line"><span class="number">4327882568</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(b)</span><br><span class="line"><span class="number">4327882568</span>           //id相同</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">0</span>] = <span class="number">11</span>        //我们改变了b中某个值</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a           </span><br><span class="line">[<span class="number">11</span>, <span class="number">2</span>, <span class="number">3</span>]          //发现a也改变了</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">11</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(id(a)==id(b))     //表示一样</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = copy.copy(a)        //现在是浅复制了</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(id(a)==id(c))</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="number">1</span>] = <span class="number">22</span>              //改变了c的值，a并不会发生改变</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="number">11</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">[<span class="number">11</span>, <span class="number">22</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>]]           //我们再创建一个列表</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = copy.copy(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)==id(d)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a[<span class="number">2</span>])==id(a[<span class="number">2</span>])          //这里就有意思了</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">2</span>][<span class="number">0</span>]=<span class="number">33</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, [<span class="number">33</span>, <span class="number">4</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, [<span class="number">33</span>, <span class="number">4</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>]=<span class="number">11</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, [<span class="number">33</span>, <span class="number">4</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="number">11</span>, <span class="number">2</span>, [<span class="number">33</span>, <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e=copy.deepcopy(a)        //深复制</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(e[<span class="number">2</span>])==id(a[<span class="number">2</span>])</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p>也就是说，copy.deepcopy是完全复制，到了不同的内存空间<br>而copy.copy的第一层指向了不同的内存空间，但第二层则指向相同的内存空间（共用内存）<br>像上面的b=a则内容和内存完全共用</p>
+<h2 id="threading-多线程"><a href="#threading-多线程" class="headerlink" title="threading 多线程"></a>threading 多线程</h2><p>节省运算时间，但还是一个时间处理一个运算</p>
+<h2 id="multiprocessing"><a href="#multiprocessing" class="headerlink" title="multiprocessing"></a>multiprocessing</h2><p>多进程<br>一般来说python只会用到计算机的一个核来运算，所以用多进程进行多核运算</p>
+<h2 id="tkinter"><a href="#tkinter" class="headerlink" title="tkinter"></a>tkinter</h2><p>自带的可编辑的gui界面、图像窗口，可以实现很多直观的功能</p>
+<h2 id="pickle存放数据"><a href="#pickle存放数据" class="headerlink" title="pickle存放数据"></a>pickle存放数据</h2><p>保存、运行python运算结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">a_dict = &#123;<span class="string">'apple'</span>:&#123;<span class="string">'pineapple'</span>:<span class="string">'菠萝'</span>,<span class="string">'ytapple'</span>:<span class="string">'烟台苹果'</span>&#125;,<span class="string">'pear'</span>:<span class="string">'梨'</span>,<span class="string">'orange'</span>:[<span class="string">'橙子'</span>,<span class="string">'凳子'</span>]&#125;     <span class="comment">##这里新建了一个字典</span></span><br><span class="line">file = open(<span class="string">'pickle_example.pickle'</span>,<span class="string">'wb'</span>)</span><br><span class="line">pickle.dump(a_dict,file)      <span class="comment">#转存a_dict到file</span></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+<p>这样在文件夹里就有了一个pickle_example.pickle文件，这个文件内容只有计算机能识别。我们可以过几天还可以打开它继续操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">file = open(<span class="string">'pickle_example.pickle'</span>,<span class="string">'rb'</span>)</span><br><span class="line">a_dict1 = pickle.load(file)</span><br><span class="line">file.close()</span><br><span class="line">print(a_dict1)</span><br></pre></td></tr></table></figure>
+<p>还有一种语法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'pickle_example.pickle'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> file:</span><br><span class="line">    a_dict1 = pickle.load(file)</span><br><span class="line">print(a_dict1)</span><br></pre></td></tr></table></figure>
+
+<h2 id="set找不同"><a href="#set找不同" class="headerlink" title="set找不同"></a>set找不同</h2><p>找到列表或序列之中不同（或者不重合）的地方</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char_list = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'d'</span>,<span class="string">'d'</span>]       <span class="comment">#去掉lish中重复的</span></span><br><span class="line">print(set(char_list))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; RESTART: &#x2F;Users&#x2F;mason&#x2F;Documents&#x2F;python1.py &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&#123;&#39;b&#39;, &#39;d&#39;, &#39;c&#39;, &#39;a&#39;&#125;         #print出来的是无序的set格式</span><br></pre></td></tr></table></figure>
+<p>那么如果不是一个list而是一句话、一段文字呢</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sentence = <span class="string">'this is a centence'</span></span><br><span class="line">print(set(sentence))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; RESTART: &#x2F;Users&#x2F;mason&#x2F;Documents&#x2F;python1.py &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&#123;&#39;h&#39;, &#39;n&#39;, &#39;i&#39;, &#39;t&#39;, &#39; &#39;, &#39;e&#39;, &#39;c&#39;, &#39;s&#39;, &#39;a&#39;&#125;   #注意中间有个&#39;&#39;空格字符串</span><br></pre></td></tr></table></figure>
+
+<p>还有一些其他的功能</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">char_list = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'d'</span>,<span class="string">'d'</span>]   </span><br><span class="line">unique_char=set(char_list)</span><br><span class="line">unique_char.add(<span class="string">'x'</span>)     </span><br><span class="line">print(unique_char)</span><br><span class="line">print(unique_char.remove(<span class="string">'x'</span>))      <span class="comment">#这里我们去掉一个元素，返回值是None,如果没有这个元素就会报错</span></span><br><span class="line">print(unique_char.discard(<span class="string">'yy'</span>))    <span class="comment">#discard和remove类似，不过如果没有这个元素不会报错</span></span><br><span class="line">print(unique_char)</span><br><span class="line">unique_char.clear()              <span class="comment">#清空set</span></span><br><span class="line">print(unique_char)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; RESTART: &#x2F;Users&#x2F;mason&#x2F;Documents&#x2F;python1.py &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&#123;&#39;b&#39;, &#39;x&#39;, &#39;a&#39;, &#39;d&#39;, &#39;c&#39;&#125;</span><br><span class="line">None</span><br><span class="line">None</span><br><span class="line">&#123;&#39;b&#39;, &#39;a&#39;, &#39;d&#39;, &#39;c&#39;&#125;</span><br><span class="line">set()</span><br></pre></td></tr></table></figure>
+<p>我们还可以找两个set 的不同</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">char_list = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'d'</span>,<span class="string">'d'</span>]   </span><br><span class="line">unique_char=set(char_list)   </span><br><span class="line"></span><br><span class="line">set1 = unique_char</span><br><span class="line">set2 = [<span class="string">'a'</span>,<span class="string">'e'</span>,<span class="string">'i'</span>]</span><br><span class="line">print(set1.difference(set2))     <span class="comment">#找不同，set1中有而set2中没有的：  &#123;'c', 'd', 'b'&#125;</span></span><br><span class="line">print(set1.intersection(set2))   <span class="comment">#找相同，两个set共有的：    &#123;'a'&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="RegEx正则表达式"><a href="#RegEx正则表达式" class="headerlink" title="RegEx正则表达式"></a>RegEx正则表达式</h2><p>正则表达式 (Regular Expression) 又称 RegEx, 是用来匹配字符的一种工具. 在一大串字符中寻找你需要的内容. 它常被用在很多方面, 比如网页爬虫, 文稿整理, 数据筛选等等. 最简单的一个例子, 比如我需要爬取网页中每一页的标题. 而网页中的标题常常是这种形式.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;title&gt;我是标题&lt;&#x2F; title&gt;</span><br></pre></td></tr></table></figure>
+<p>而且每个网页的标题各不相同, 我就能使用正则表达式, 用一种简单的匹配方法, 一次性选取出成千上万网页的标题信息. 正则表达式绝对不是一天就能学会和记住的, 因为表达式里面的内容非常多, 强烈建议, 现在这个阶段, 你只需要了解正则里都有些什么, 不用记住, 等到你真正需要用到它的时候, 再反过头来, 好好琢磨琢磨, 那个时候才是你需要训练自己记住这些表达式的时候.<br>对文本处理的强大武器，常用于爬虫，匹配文本，找到有用的信息<br>正则表达式无非就是在做这么一回事. 在文字中找到特定的内容, 比如下面的内容. 我们在 “dog runs to cat” 这句话中寻找是否存在 “cat” 或者 “bird”.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re     <span class="comment">#导入模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#matching string  最简单的 python匹配</span></span><br><span class="line">pattern1 = <span class="string">'cat'</span></span><br><span class="line">pattern2 = <span class="string">'bird'</span></span><br><span class="line">string = <span class="string">'dog runs to cat'</span>    <span class="comment">#我们要在这句话中找上述两个字符串</span></span><br><span class="line">print(pattern1 <span class="keyword">in</span> string)   <span class="comment">#返回了True</span></span><br><span class="line">print(pattern2 <span class="keyword">in</span> string)   <span class="comment">#返回了False</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#regualr expression     用正则表达式配对</span></span><br><span class="line">print(re.search(pattern1,string))   <span class="comment">#返回 &lt;re.Match object; span=(12, 15), match='cat'&gt;</span></span><br><span class="line">print(re.search(pattern2,string))   <span class="comment">#返回None</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#multiple patterns ('run' or 'ran') 匹配多种可能性</span></span><br><span class="line">ptn = <span class="string">r'r[au]n'</span>             <span class="comment">#在‘’前写了r，这就成了一个表达式的形式</span></span><br><span class="line">print(re.search(ptn,string))</span><br><span class="line"></span><br><span class="line"><span class="comment">#continue 匹配更多种可能</span></span><br><span class="line">print(re.search(<span class="string">r'r[A-Z]n'</span>,<span class="string">'dog runs to cat'</span>))  <span class="comment">#返回None</span></span><br><span class="line">print(re.search(<span class="string">r'r[a-z]n'</span>,<span class="string">'dog runs to cat'</span>))</span><br><span class="line">print(re.search(<span class="string">r'r[0-9]n'</span>,<span class="string">'dog r2ns to cat'</span>))</span><br><span class="line">print(re.search(<span class="string">r'r[0-9a-z]n'</span>,<span class="string">'dog runs to cat'</span>))   <span class="comment">#都可以找到</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#数字</span></span><br><span class="line"><span class="comment">#\d : decimal digit 数字形式</span></span><br><span class="line">print(re.search(<span class="string">r'r\dn'</span>,<span class="string">'run r2n'</span>)) <span class="comment">#&lt;re.Match object; span=(4, 7), match='r2n'&gt;</span></span><br><span class="line"><span class="comment">#\D : any non-decimal digit 非数(字幕形式)</span></span><br><span class="line">print(re.search(<span class="string">r'r\Dn'</span>,<span class="string">'run r2n'</span>)) <span class="comment">#&lt;re.Match object; span=(0, 3), match='run'&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#空白</span></span><br><span class="line"><span class="comment">#\s : any white space [\t \n \f \v]  空白的</span></span><br><span class="line">print(re.search(<span class="string">r'r\sn'</span>,<span class="string">'r\nn r2n'</span>))</span><br><span class="line"><span class="comment">#\S : opposite to \s, any non-white space    </span></span><br><span class="line">print(re.search(<span class="string">r'r\Sn'</span>,<span class="string">'r\nn r2n'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#所有字母数字和“_”</span></span><br><span class="line"><span class="comment">#\w: [a-zA-Z0-9_]</span></span><br><span class="line">print(re.search(<span class="string">r'r\wn'</span>,<span class="string">'r\nn r4n'</span>))</span><br><span class="line"><span class="comment">#\W: opposite to \w</span></span><br><span class="line">print(re.search(<span class="string">r'r\Wn'</span>,<span class="string">'r\nn r4n'</span>))</span><br></pre></td></tr></table></figure>
+
+<p>按类型匹配有下面这些<br>\d : 任何数字<br>\D : 不是数字<br>\s : 任何 white space, 如 [\t\n\r\f\v]<br>\S : 不是 white space<br>\w : 任何大小写字母, 数字和 “” [a-zA-Z0-9]<br>\W : 不是 \w<br>\b : 空白字符 (只在某个字的开头或结尾)<br>\B : 空白字符 (不在某个字的开头或结尾)<br>\ : 匹配 <br>. : 匹配任何字符 (除了 \n)<br>^ : 匹配开头<br>$ : 匹配结尾<br>? : 前面的字符可有可无</p>
+<p>重复匹配<br>如果我们想让某个规律被重复使用, 在正则里面也是可以实现的, 而且实现的方式还有很多. 具体可以分为这三种:</p>
+<ul>
+<li>: 重复零次或多次</li>
+</ul>
+<ul>
+<li>: 重复一次或多次<br>{n, m} : 重复 n 至 m 次<br>{n} : 重复 n 次</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/08/Python-step5/" rel="prev" title="Python step5">
+      <i class="fa fa-chevron-left"></i> Python step5
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/08/%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E5%87%86%E5%A4%87%E4%B8%80%E5%9C%BA%E5%AE%B6%E5%AE%B4%E7%9A%84%E6%80%9D%E8%80%83/" rel="next" title="关于如何准备一场家宴的思考">
+      关于如何准备一场家宴的思考 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#zip-lambda-map"><span class="nav-number">1.</span> <span class="nav-text">zip lambda map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浅复制-amp-深复制-deepcopy"><span class="nav-number">2.</span> <span class="nav-text">浅复制&amp;深复制 (deepcopy)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#threading-多线程"><span class="nav-number">3.</span> <span class="nav-text">threading 多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multiprocessing"><span class="nav-number">4.</span> <span class="nav-text">multiprocessing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tkinter"><span class="nav-number">5.</span> <span class="nav-text">tkinter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pickle存放数据"><span class="nav-number">6.</span> <span class="nav-text">pickle存放数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set找不同"><span class="nav-number">7.</span> <span class="nav-text">set找不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RegEx正则表达式"><span class="nav-number">8.</span> <span class="nav-text">RegEx正则表达式</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mason</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mason</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
