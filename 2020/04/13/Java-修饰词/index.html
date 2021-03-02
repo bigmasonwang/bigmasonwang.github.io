@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 4.2.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="关于Java修饰符">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-13T03:03:33.000Z">
-<meta property="article:modified_time" content="2020-04-14T02:24:56.584Z">
+<meta property="article:modified_time" content="2020-04-17T02:25:31.000Z">
 <meta property="article:author" content="Mason">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 11:54:56" itemprop="dateModified" datetime="2020-04-14T11:54:56+09:30">2020-04-14</time>
+                <time title="Modified: 2020-04-17 11:55:31" itemprop="dateModified" datetime="2020-04-17T11:55:31+09:30">2020-04-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -328,6 +328,18 @@
 <td>共享域修饰符</td>
 </tr>
 </tbody></table>
+<h4 id="static"><a href="#static" class="headerlink" title="static"></a>static</h4><h5 id="静态域fields"><a href="#静态域fields" class="headerlink" title="静态域fields"></a>静态域fields</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span></span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> nextId;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中, 每一个employee对象都有自己的<code>id</code>区域, 都共享一个<code>nextId</code>. 即使没有对象, <code>nextId</code>静态域也是存在的. 所以说仅属于类, 而不属于对象</p>
+<h5 id="静态常量-constants"><a href="#静态常量-constants" class="headerlink" title="静态常量 constants"></a>静态常量 constants</h5><p>静态变量十分稀少, 但静态常量很常见, 如π:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> PI = <span class="number">3.1415926</span>.....;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在程序中, 可以直接<code>Math.PI</code>使用, 不需要实例化一个对象.</p>
+<h5 id="静态方法-methods"><a href="#静态方法-methods" class="headerlink" title="静态方法 methods"></a>静态方法 methods</h5><p>在两种情况下使用静态方法:</p>
+<ol>
+<li>一个方法不需要操作一个对象, 因为它所需的参数都明确, 如<code>Math.pow</code></li>
+<li>一个方法需要访问类中的静态域, 如 <code>Employee.getNextId</code></li>
+</ol>
 
     </div>
 
@@ -411,7 +423,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#访问控制修饰符-Access-Modifiers"><span class="nav-number">1.</span> <span class="nav-text">访问控制修饰符 Access Modifiers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对于类-class"><span class="nav-number">1.1.</span> <span class="nav-text">对于类 class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于属性-方法-构造函数-attributes-method-and-constructors"><span class="nav-number">1.2.</span> <span class="nav-text">对于属性&#x2F;方法&#x2F;构造函数 attributes, method and constructors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非访问修饰符-Non-Access-Modifiers"><span class="nav-number">2.</span> <span class="nav-text">非访问修饰符 Non-Access Modifiers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对于类-class-1"><span class="nav-number">2.1.</span> <span class="nav-text">对于类 class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于属性-方法-attributes-method"><span class="nav-number">2.2.</span> <span class="nav-text">对于属性&#x2F;方法 attributes, method</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#访问控制修饰符-Access-Modifiers"><span class="nav-number">1.</span> <span class="nav-text">访问控制修饰符 Access Modifiers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对于类-class"><span class="nav-number">1.1.</span> <span class="nav-text">对于类 class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于属性-方法-构造函数-attributes-method-and-constructors"><span class="nav-number">1.2.</span> <span class="nav-text">对于属性&#x2F;方法&#x2F;构造函数 attributes, method and constructors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非访问修饰符-Non-Access-Modifiers"><span class="nav-number">2.</span> <span class="nav-text">非访问修饰符 Non-Access Modifiers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对于类-class-1"><span class="nav-number">2.1.</span> <span class="nav-text">对于类 class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于属性-方法-attributes-method"><span class="nav-number">2.2.</span> <span class="nav-text">对于属性&#x2F;方法 attributes, method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#static"><span class="nav-number">2.2.1.</span> <span class="nav-text">static</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#静态域fields"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">静态域fields</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#静态常量-constants"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">静态常量 constants</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#静态方法-methods"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">静态方法 methods</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -467,7 +479,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
